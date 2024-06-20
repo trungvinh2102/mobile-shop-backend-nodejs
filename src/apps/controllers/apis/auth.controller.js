@@ -31,7 +31,7 @@ class AuthController {
             password: body.password
           },
           config.get('app.jwtAccessKey'),
-          { expiresIn: "7d" }
+          { expiresIn: "1d" }
         )
 
         // luu token len cookie
