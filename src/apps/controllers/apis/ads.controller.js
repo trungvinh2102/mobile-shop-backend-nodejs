@@ -1,7 +1,6 @@
 const adModel = require("../../models/ads.model");
 const cloudinary = require("../../../common/cloudinary");
 const fs = require("fs");
-const path = require("path");
 
 const createAds = async (req, res, next) => {
   try {
