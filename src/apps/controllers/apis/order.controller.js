@@ -45,9 +45,9 @@ exports.order = async (req, res) => {
     items,
   });
   await transporter.sendMail({
-    from: '"Vietpro Shop" <quantri.vietproshop@gmail.com>',
-    to: `sirtuanhoang@gmail.com, ${body.email}`,
-    subject: "Xác nhận đơn hàng từ Vietpro Store",
+    from: '"Mobile Shop" <work.trungvinh@gmail.com>',
+    to: `work.trungvinh@gmail.com, ${body.email}`,
+    subject: "Xác nhận đơn hàng từ Mobile Shop",
     html,
   });
 
