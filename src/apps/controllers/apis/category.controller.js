@@ -36,19 +36,19 @@ class CategoryController {
           { category_left: { $gt: rightValue } },
           { $inc: { category_left: 2 } }
         );
-
+      } else {
         // Tìm giá trị max của category_right trong các danh mục cùng cấp và tăng lên 1
         const maxRightValue = await CategoryModel.findOne({ category_parentId: convertToObject(parent_id) })
           .select('category_right')
           .sort({ category_right: -1 });
         console.log("CategoryController ~ createCategory ~ maxRightValue:", maxRightValue);
 
+        // Nếu không có parent_id, đặt rightValue là 1
         if (maxRightValue) {
           rightValue = maxRightValue.category_right + 1;
+        } else {
+          rightValue = 1;
         }
-      } else {
-        // Nếu không có parent_id, đặt rightValue là 1
-        rightValue = 1;
       }
 
       // Cập nhật category_left và category_right của danh mục mới

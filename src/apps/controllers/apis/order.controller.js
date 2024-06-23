@@ -114,28 +114,18 @@ exports.orderDetails = async (req, res) => {
 }
 
 
-exports.cancelOrder = async (req, res, next) => {
+exports.cancelOrder = async (req, res) => {
   try {
-    const { id, is_delete, status } = req.body;
+    const { id } = req.params
+    await OrderModel.updateOne({
+      _id: id,
+    }, {
+      $set: { status: 0 }
+    }, { new: true })
 
-    // Tìm đơn hàng theo ID
-    const order = await OrderModel.findById(id);
-    console.log("exports.cancelOrder= ~ order:", order);
-
-    // Kiểm tra xem đơn hàng có tồn tại không
-    if (!order) return res.status(404).json(`Order doen't exist!`);
-
-    const updatedOrder = await OrderModel.updateOne(
-      { _id: id },
-      { $set: { is_delete: is_delete, status: status } }
-    );
-    console.log("exports.cancelOrder= ~ updatedOrder:", updatedOrder);
-
-    return res.status(200).json({ updatedOrder });
+    return res.status(200).json("Cancel order sucessfully!")
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json(error)
   }
 }
-

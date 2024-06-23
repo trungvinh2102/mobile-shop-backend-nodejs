@@ -11,7 +11,7 @@ router.post('/register', AuthController.registerCustomer)
 router.post('/update', CustomerController.updateCustomer)
 router.get("/:id/order", AuthenticationMiddleware.verifyAuthenticationCustomer, OrderController.orderByCustomer);
 router.get("/order/:id", AuthenticationMiddleware.verifyAuthenticationCustomer, OrderController.orderDetails);
-router.post("/order/:id", AuthenticationMiddleware.verifyAuthenticationCustomer, OrderController.cancelOrder);
+router.get("/order/:id/canceled", AuthenticationMiddleware.verifyAuthenticationCustomer, OrderController.cancelOrder);
 
 
 
